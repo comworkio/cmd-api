@@ -4,12 +4,6 @@ An api that take a command into an environment variable and execute this command
 
 This is usefull to execute some command inside Kubernetes pods without having to override your application image.
 
-You'll just need to add a container with this image to your pod and enable this :
-
-```yaml
-shareProcessNamespace: true
-```
-
 ## Environment variables
 
 * `FLASK_RUN_HOST`: api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
