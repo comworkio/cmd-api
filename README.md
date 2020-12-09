@@ -15,3 +15,8 @@ shareProcessNamespace: true
 * `FLASK_RUN_HOST`: api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
 * `FLASK_RUN_PORT`: api port (default binded to `8080`)
 * `API_CMD`: the command to run when you call the `/` endpoint
+
+## Git repo
+
+* Main repo: https://gitlab.comwork.io/oss/cmd-api
+* Github mirror backup: https://github.com/idrissneumann/cmd-api
