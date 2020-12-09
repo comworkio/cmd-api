@@ -2,7 +2,7 @@ version: "3.3"
 
 services: 
   cmd-api:
-    image: comworkio/api-cmd
+    image: comworkio/cmd-api
     user: root
     build:
       context: .
