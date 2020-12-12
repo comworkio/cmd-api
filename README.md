@@ -1,8 +1,6 @@
 # CMD Api
 
-An api that take a command into an environment variable and execute this commande with a restful/http endpoint.
-
-This is usefull to execute some command inside Kubernetes pods without having to override your application image.
+Make a shell command available as Restful api.
 
 ## Git repo
 
@@ -21,7 +19,7 @@ This is usefull to execute some command inside Kubernetes pods without having to
 * `/cmd` or `/cmd-api`: synchronous execution of the command (you'll get the output in the http response body)
 * `/cmd/async` or `/cmd-api/async`: asynchronous execution of the command (you won't get the output in the http response body)
 
-## Testing with docker
+## Test with docker
 
 ```shell
 $ docker-compose up
