@@ -22,7 +22,14 @@ class CmdApi(Resource):
             'details': output
         }
 
-api.add_resource(CmdApi, '/')
+class RootEndPoint(Resource):
+    def get(self):
+        return {
+            'alive': True
+        }
+
+api.add_resource(RootEndPoint, '/')
+api.add_resource(CmdApi, '/cmd')
 
 if __name__ == '__main__':
     app.run()

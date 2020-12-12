@@ -8,6 +8,6 @@ services:
       context: .
       dockerfile: Dockerfile
     environment: 
-      - API_CMD=ls -l
+      - API_CMD=sleep 3; ls -l
     ports: 
       - 8080:8080
