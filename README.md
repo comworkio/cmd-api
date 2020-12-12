@@ -13,12 +13,12 @@ This is usefull to execute some command inside Kubernetes pods without having to
 
 * `FLASK_RUN_HOST`: api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
 * `FLASK_RUN_PORT`: api port (default binded to `8080`)
-* `API_CMD`: the command to run when you call the `/cmd` endpoint
+* `API_CMD`: the command to run when you call the `/cmd` or `/cmd-api` endpoint
 
 ## The endpoints
 
-* `/`: healthcheck
-* `/cmd`: synchronous execution of the command (you'll get the output in the http response body)
+* `/` or `/health`: healthcheck endpoint
+* `/cmd` or `/cmd-api`: synchronous execution of the command (you'll get the output in the http response body)
 
 ## Testing with docker
 

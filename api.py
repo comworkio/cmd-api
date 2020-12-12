@@ -28,8 +28,11 @@ class RootEndPoint(Resource):
             'alive': True
         }
 
-api.add_resource(RootEndPoint, '/')
-api.add_resource(CmdApi, '/cmd')
+health_check_routes = ['/', '/health', '/health/']
+cmd_routes = ['/cmd', '/cmd-api', '/cmd/', '/cmd-api/']
+
+api.add_resource(RootEndPoint, *health_check_routes)
+api.add_resource(CmdApi, *cmd_routes)
 
 if __name__ == '__main__':
     app.run()
