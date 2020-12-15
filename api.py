@@ -4,6 +4,7 @@ from flask_restful import Resource, Api
 from subprocess import check_output
 from multiprocessing import Process
 import os
+import json
 
 app = Flask(__name__)
 api = Api(app)
@@ -44,13 +45,24 @@ class RootEndPoint(Resource):
             'alive': True
         }
 
+class ManifestEndPoint(Resource):
+    def get(self):
+        try:
+            with open('manifest.json') as manifest_file:
+                manifest = json.load(manifest_file)
+                return manifest
+        except IOError as err:
+            return {"error": err}
+
 health_check_routes = ['/', '/health', '/health/']
 cmd_routes = ['/cmd', '/cmd-api', '/cmd/', '/cmd-api/']
 async_cmd_routes = ['/cmd/async', '/cmd-api/async', '/cmd/async/', '/cmd-api/async/']
+manifest_routes = ['/manifest', '/manifest/']
 
 api.add_resource(RootEndPoint, *health_check_routes)
 api.add_resource(CmdApi, *cmd_routes)
 api.add_resource(AsyncCmdApi, *async_cmd_routes)
+api.add_resource(ManifestEndPoint, *manifest_routes)
 
 if __name__ == '__main__':
     app.run()
