@@ -2,7 +2,8 @@ FROM python:3
 
 ENV FLASK_APP=/api.py \
     FLASK_RUN_HOST=0.0.0.0 \
-    FLASK_RUN_PORT=8080
+    FLASK_RUN_PORT=8080 \
+    MANIFEST_FILE_PATH=/manifest.json
 
 COPY ./api.py ./manifest.json /
 

@@ -12,12 +12,14 @@ Make a shell command available as Restful api.
 * `FLASK_RUN_HOST`: api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
 * `FLASK_RUN_PORT`: api port (default binded to `8080`)
 * `API_CMD`: the command to run when you call the endpoints
+* `MANIFEST_FILE_PATH`: the manifest file path (a file that you can override to provide apps information like the version built etc)
 
 ## The endpoints
 
 * `/` or `/health`: healthcheck endpoint
 * `/cmd` or `/cmd-api`: synchronous execution of the command (you'll get the output in the http response body)
 * `/cmd/async` or `/cmd-api/async`: asynchronous execution of the command (you won't get the output in the http response body)
+* `/manifest`: get the manifest informations
 
 ## Test with docker
 
