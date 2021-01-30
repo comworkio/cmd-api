@@ -50,4 +50,6 @@ $ curl localhost:8080/cmd/async
 {"executed": true, "async": true}
 $ curl -X POST localhost:8080/cmd/async -d '{"argv": "-a"}'
 {"executed": true, "async": true}
+$ curl localhost:8080/manifest 
+{"version": "2.1", "sha": "1c7cb1f"}
 ```
