@@ -10,6 +10,7 @@ tag_and_push() {
   if [[ $3 == "x86" ]]; then
     docker tag "comworkio/${2}:latest" "comworkio/${2}:${1}"
     docker push "comworkio/${2}:${1}"
+    docker push "comworkio/${2}:latest"
   fi
 
   docker tag "comworkio/${2}:latest" "comworkio/${2}:latest-${3}" "comworkio/${2}:${1}-${3}"
