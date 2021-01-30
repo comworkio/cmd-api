@@ -42,7 +42,7 @@ This image will provide you the following executables:
 * gawk
 * curl
 * jq
-* yq
+* yq (only for x86 version)
 * kubectl
 
 N.B:
