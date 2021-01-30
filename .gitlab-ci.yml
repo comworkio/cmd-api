@@ -16,6 +16,11 @@ cmd-api:
   script:
     - setsid ./ci/docker-deliver.sh "cmd-api" "2.2"
   only:
-    - /^(master.*)$/
+    refs:
+      - /^(master.*)$/
+    changes:
+      - api.py
+      - Dockerfile
+      - docker-compose-build.yml
   tags:
     - cmd-api
