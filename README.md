@@ -29,6 +29,10 @@ $ curl localhost:8080
 {"alive": true}
 $ curl localhost:8080/cmd
 {"executed": true, "details": "total 76\ndrwxr-xr-x   2 root root 4096 Dec 12 20:43 __pycache__\n-rw-r--r--"}
+$ curl -X POST localhost:8080/cmd -d '{"argv": "-a"}'
+{"executed": true, "details": "total 76\ndrwxr-xr-x   2 root root 4096 Dec 12 20:43 __pycache__\n-rw-r--r--"}
 $ curl localhost:8080/cmd/async
+{"executed": true, "async": true}
+$ curl -X POST localhost:8080/cmd/async -d '{"argv": "-a"}'
 {"executed": true, "async": true}
 ```

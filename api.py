@@ -16,8 +16,19 @@ def get_script_output (cmd):
     except:
         return check_output(cmd, shell=True, universal_newlines=True)
 
+def run_cmd():
+    return get_script_output(os.environ['API_CMD'])
+
 def run_cmd_async():
-    print("[run_cmd_async] output = {}".format(get_script_output(os.environ['API_CMD'])))
+    print("[run_cmd_async] output = {}".format(run_cmd()))
+
+def run_cmd_argv():
+    body = request.get_json(force=True)
+    cmd = "{} {}".format(os.environ['API_CMD'], body['argv'])
+    return get_script_output(cmd)
+
+def run_cmd_async_argv():
+    print("[run_cmd_async] output = {}".format(run_cmd_argv()))
 
 class AsyncCmdApi(Resource):
     def get(self):
@@ -30,10 +41,34 @@ class AsyncCmdApi(Resource):
             'executed': True,
             'async': True
         }
+    def post(self):
+        c = check_mandatory_param('argv')
+        if is_not_ok(c):
+            return c, 400
+
+        async_process = Process( 
+            target=run_cmd_async_argv,
+            daemon=True
+        )
+        async_process.start()
+        return {
+            'executed': True,
+            'async': True
+        }
 
 class CmdApi(Resource):
     def get(self):
-        output = get_script_output(os.environ['API_CMD'])
+        output = run_cmd()
+        return {
+            'executed': True,
+            'details': output
+        }
+    def post(self):
+        c = check_mandatory_param('argv')
+        if is_not_ok(c):
+            return c, 400
+
+        output = run_cmd_argv()
         return {
             'executed': True,
             'details': output

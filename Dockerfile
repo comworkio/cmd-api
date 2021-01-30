@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine
 
 ENV K8S_VERSION=1.18.2 \
     YQ_VERSION=v4.2.1 \
