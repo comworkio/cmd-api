@@ -3,14 +3,8 @@ FROM balenalib/raspberrypi3-debian:latest AS base
 ENV PYTHONUNBUFFERED "1"
 ENV PYTHONIOENCODING "UTF-8"
 
-RUN apt-get update -y && \
-    apt-get install curl python3 python3-pip libcurl4-openssl-dev libssl-dev -y && \
-    pip3 install elasticsearch pycurl 
-
-
-
 ENV K8S_VERSION=1.18.2 \
-    K8S_ARCH=arm && \
+    K8S_ARCH=arm \
     YQ_VERSION=v4.2.1 \
     YQ_BINARY=yq_linux_amd64 \
     FLASK_APP=/api.py \

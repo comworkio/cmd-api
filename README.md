@@ -2,7 +2,7 @@
 
 Do you want to expose a piece of shell as a Restful API without having to worry about looking for a complex or non-existent FaaS solution on your cloud provider? This is for you! 
 
-This is the low cost FaaS that can be run wherever there is an OCI container runtime!
+This is the low cost FaaS that can be run wherever there is an OCI container runtime (even a raspberrypi)!
 
 ## Table of content
 
