@@ -28,6 +28,11 @@ Of course there is arm version optimized for Raspberrypi also. You just have to 
 docker pull comworkio/cmd-api:latest # x86
 docker pull comworkio/cmd-api:2.2 # x86
 docker pull comworkio/cmd-api:2.2-{sha} # x86
+
+docker pull comworkio/cmd-api:latest-x86 # x86
+docker pull comworkio/cmd-api:2.2-x86 # x86
+docker pull comworkio/cmd-api:2.2-{sha}-x86 # x86
+
 docker pull comworkio/cmd-api:latest-arm # arm
 docker pull comworkio/cmd-api:2.2-arm # arm
 docker pull comworkio/cmd-api:2.2-{sha}-arm # arm
