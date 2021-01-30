@@ -1,10 +1,13 @@
 # CMD Api
 
-Make a shell command available as Restful api. This is the low-cost FaaS !
+Do you want to expose a piece of shell as a Restful API without having to worry about looking for a complex or non-existent FaaS solution on your cloud provider?
 
-You only have to configure this [OCI image](https://hub.docker.com/r/comworkio/cmd-api) as a pod if you're using Kubernetes or container if you're using something like docker, docker-compose, podman or whatever.
+This is for you! This is the low cost FaaS that can be run wherever there is an OCI container runtime!
+
+You'll only have to configure this [OCI image](https://hub.docker.com/r/comworkio/cmd-api) as a pod if you're using Kubernetes or container if you're using something like docker, docker-compose, podman or whatever.
 
 This image will provide:
+* python3
 * bash
 * curl
 * jq
