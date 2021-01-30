@@ -35,14 +35,14 @@ This image will provide you the following executables:
 
 N.B:
 * If there is something that miss, feel free to write your own Dockerfile that inherit this image (`comworkio/cmd-api`).
-* If you think that there is too much stuffs in this images, feel free to pick only what you need with a multistage build!
+* If you think that there is too much stuffs in this image, feel free to pick only what you need with a multistage build!
 
 ### Environment variables
 
-* `FLASK_RUN_HOST`: api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
-* `FLASK_RUN_PORT`: api port (default binded to `8080`)
-* `API_CMD`: the command to run when you call the endpoints
-* `MANIFEST_FILE_PATH`: the manifest file path (a file that you can override to provide apps information like the version built etc)
+* `API_CMD`: the command to run when you call the endpoints (that can be an invocation of a shell script mounted via configmap or whatever)
+* `FLASK_RUN_HOST`(optional): api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
+* `FLASK_RUN_PORT`(optional): api port (default binded to `8080`)
+* `MANIFEST_FILE_PATH`(optional): a json manifest file path (a file that you can override to provide apps information like the version built etc)
 
 ### The endpoints
 
