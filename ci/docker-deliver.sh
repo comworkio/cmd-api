@@ -12,8 +12,9 @@ tag_and_push() {
     docker push "comworkio/${2}:${1}"
   fi
 
-  docker tag "comworkio/${2}:latest-${3}" "comworkio/${2}:${1}-${3}"
+  docker tag "comworkio/${2}:latest" "comworkio/${2}:latest-${3}" "comworkio/${2}:${1}-${3}"
   docker push "comworkio/${2}:${1}-${3}"
+  docker push "comworkio/${2}:latest-${3}"
 }
 
 cd "${REPO_PATH}" && git pull origin master || : 
@@ -26,7 +27,6 @@ COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose-bu
 
 echo "${DOCKER_ACCESS_TOKEN}" | docker login --username comworkio --password-stdin
 
-[[ $ARCH == "x86" ]] && docker-compose push "${IMAGE}"
 tag_and_push "${VERSION}" "${IMAGE}" "${ARCH}"
 tag_and_push "${VERSION}-${CI_COMMIT_SHORT_SHA}" "${IMAGE}" "${ARCH}"
 
