@@ -7,13 +7,18 @@ VERSION="${2}"
 ARCH="${3}"
 
 tag_and_push() {
-  [[ $ARCH == "x86" ]] && docker tag "comworkio/${2}:latest" "comworkio/${2}:${1}"
-  docker tag "comworkio/${2}:latest-${ARCH}" "comworkio/${2}:${1}-${ARCH}"
-  [[ $ARCH == "x86" ]] && docker push "comworkio/${2}:${1}"
-  [[ $ARCH != "x86" ]] && docker push "comworkio/${2}:${1}-${ARCH}"
+  if [[ $3 == "x86" ]]; then
+    docker tag "comworkio/${2}:latest" "comworkio/${2}:${1}"
+    docker push "comworkio/${2}:${1}"
+  fi
+
+  docker tag "comworkio/${2}:latest-${3}" "comworkio/${2}:${1}-${3}"
+  docker push "comworkio/${2}:${1}-${3}"
 }
 
 cd "${REPO_PATH}" && git pull origin master || : 
+git config --global user.email "${GIT_EMAIL}"
+git config --global user.name "${GIT_EMAIL}"
 sha="$(git rev-parse --short HEAD)"
 echo '{"version":"'"${VERSION}"'", "sha":"'"${sha}"'", "arch":"'"${ARCH}"'"}' > manifest.json
 
@@ -22,8 +27,8 @@ COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose-bu
 echo "${DOCKER_ACCESS_TOKEN}" | docker login --username comworkio --password-stdin
 
 [[ $ARCH == "x86" ]] && docker-compose push "${IMAGE}"
-tag_and_push "${VERSION}" "${IMAGE}"
-tag_and_push "${VERSION}-${CI_COMMIT_SHORT_SHA}" "${IMAGE}"
+tag_and_push "${VERSION}" "${IMAGE}" "${ARCH}"
+tag_and_push "${VERSION}-${CI_COMMIT_SHORT_SHA}" "${IMAGE}" "${ARCH}"
 
 git add .
 git stash
