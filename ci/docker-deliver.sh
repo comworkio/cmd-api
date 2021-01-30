@@ -9,7 +9,8 @@ ARCH="${3}"
 tag_and_push() {
   [[ $ARCH == "x86" ]] && docker tag "comworkio/${2}:latest" "comworkio/${2}:${1}"
   docker tag "comworkio/${2}:latest-${ARCH}" "comworkio/${2}:${1}-${ARCH}"
-  docker push "comworkio/${2}:${1}"
+  [[ $ARCH == "x86" ]] && docker push "comworkio/${2}:${1}"
+  [[ $ARCH != "x86" ]] && docker push "comworkio/${2}:${1}-${ARCH}"
 }
 
 cd "${REPO_PATH}" && git pull origin master || : 

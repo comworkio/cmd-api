@@ -22,6 +22,7 @@ cmd-api-x86:
       - api.py
       - Dockerfile
       - docker-compose-build-x86.yml
+      - ci/docker-deliver.sh
   tags:
     - cmd-api
 
@@ -36,5 +37,6 @@ cmd-api-arm:
       - api.py
       - Dockerfile.arm
       - docker-compose-build-arm.yml
+      - ci/docker-deliver.sh
   tags:
     - buildarm
