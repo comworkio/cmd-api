@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Resource, Api
 
 from subprocess import check_output
@@ -15,6 +15,22 @@ def get_script_output (cmd):
         return check_output(cmd, shell=True, text=True)
     except:
         return check_output(cmd, shell=True, universal_newlines=True)
+
+def is_not_empty (var):
+    return var is not None and "" != var and "null" != var and "nil" != var
+
+def is_empty (var):
+    return not is_not_empty(var)
+
+def is_empty_request_field (name):
+    body = request.get_json(force=True)
+    return not name in body or is_empty(body[name])
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
+def is_not_ok(body):
+    return not "status" in body or body["status"] != "ok"
 
 def check_mandatory_param(name):
     if is_empty_request_field(name):
