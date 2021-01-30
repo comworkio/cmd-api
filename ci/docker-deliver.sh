@@ -13,6 +13,8 @@ tag_and_push() {
 }
 
 cd "${REPO_PATH}" && git pull origin master || : 
+sha="$(git rev-parse --short HEAD)"
+echo '{"version":"'"${VERSION}"'", "sha":"'"${sha}"'"}' > manifest.json
 
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build --no-cache "${IMAGE}"
 
@@ -21,3 +23,7 @@ echo "${DOCKER_ACCESS_TOKEN}" | docker login --username comworkio --password-std
 docker-compose push "${IMAGE}"
 tag_and_push "${VERSION}" "${IMAGE}"
 tag_and_push "${VERSION}-${CI_COMMIT_SHORT_SHA}" "${IMAGE}"
+
+git add .
+git stash
+git stash clear
