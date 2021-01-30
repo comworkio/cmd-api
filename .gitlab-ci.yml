@@ -11,16 +11,30 @@ github-mirror:
   tags:
     - cmd-api
 
-cmd-api:
+cmd-api-x86:
   stage: publish
   script:
-    - setsid ./ci/docker-deliver.sh "cmd-api" "2.2"
+    - setsid ./ci/docker-deliver.sh "cmd-api" "2.2" "x86"
   only:
     refs:
       - /^(master.*)$/
     changes:
       - api.py
       - Dockerfile
-      - docker-compose-build.yml
+      - docker-compose-build-x86.yml
   tags:
     - cmd-api
+
+cmd-api-arm:
+  stage: publish
+  script:
+    - setsid ./ci/docker-deliver.sh "cmd-api" "2.2" "arm"
+  only:
+    refs:
+      - /^(master.*)$/
+    changes:
+      - api.py
+      - Dockerfile.arm
+      - docker-compose-build-arm.yml
+  tags:
+    - buildarm

@@ -20,7 +20,19 @@ The image is available and versioned here: https://hub.docker.com/r/comworkio/cm
 
 You'll only have to configure this image as a pod if you're using Kubernetes or container if you're using something like docker, docker-compose, podman or whatever.
 
-You'll find an example with docker-compose [here](./docker-compose.yml) and with Kubernetes [there](./deployment.yaml)
+You'll find an example with docker-compose [here](./docker-compose.yml) and with Kubernetes [there](./deployment.yaml).
+
+Of course there is arm version optimized for Raspberrypi also. You just have to choose the right tag according to your achitecture:
+
+```shell
+docker pull comworkio/cmd-api:latest # x86
+docker pull comworkio/cmd-api:2.2 # x86
+docker pull comworkio/cmd-api:2.2-{sha} # x86
+docker pull comworkio/cmd-api:latest-arm # arm
+docker pull comworkio/cmd-api:2.2-arm # arm
+docker pull comworkio/cmd-api:2.2-{sha}-arm # arm
+```
+
 ### What's available in there
 
 This image will provide you the following executables:
@@ -68,5 +80,5 @@ $ curl localhost:8080/cmd/async
 $ curl -X POST localhost:8080/cmd/async -d '{"argv": "-a"}'
 {"executed": true, "async": true}
 $ curl localhost:8080/manifest 
-{"version": "2.1", "sha": "1c7cb1f"}
+{"version": "2.1", "sha": "1c7cb1f", "arch": "x86"}
 ```

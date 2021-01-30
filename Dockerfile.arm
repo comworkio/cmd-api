@@ -1,0 +1,33 @@
+FROM balenalib/raspberrypi3-debian:latest AS base
+
+ENV PYTHONUNBUFFERED "1"
+ENV PYTHONIOENCODING "UTF-8"
+
+RUN apt-get update -y && \
+    apt-get install curl python3 python3-pip libcurl4-openssl-dev libssl-dev -y && \
+    pip3 install elasticsearch pycurl 
+
+
+
+ENV K8S_VERSION=1.18.2 \
+    K8S_ARCH=arm && \
+    YQ_VERSION=v4.2.1 \
+    YQ_BINARY=yq_linux_amd64 \
+    FLASK_APP=/api.py \
+    FLASK_RUN_HOST=0.0.0.0 \
+    FLASK_RUN_PORT=8080 \
+    WERKZEUG_RUN_MAIN=true \
+    MANIFEST_FILE_PATH=/manifest.json
+
+COPY ./api.py ./manifest.json /
+
+RUN apt-get update -y && \
+    apt-get install curl python3 python3-pip libcurl4-openssl-dev libssl-dev jq -y && \
+    pip3 install flask-restful && \
+    curl -LO "https://storage.googleapis.com/kubernetes-release/release/v$K8S_VERSION/bin/linux/$K8S_ARCH/kubectl" && \
+    mv ./kubectl /usr/bin/kubectl && \
+    chmod +x /usr/bin/kubectl
+
+EXPOSE 8080
+
+CMD ["python3", "-m", "flask", "run"]
