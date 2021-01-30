@@ -14,7 +14,7 @@ github-mirror:
 cmd-api:
   stage: publish
   script:
-    - setsid ./ci/docker-deliver.sh "cmd-api" "2.1"
+    - setsid ./ci/docker-deliver.sh "cmd-api" "2.2"
   only:
     - /^(master.*)$/
   tags:
