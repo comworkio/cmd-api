@@ -21,18 +21,19 @@ The image is available and versioned here: https://hub.docker.com/r/comworkio/cm
 You'll only have to configure this image as a pod if you're using Kubernetes or container if you're using something like docker, docker-compose, podman or whatever.
 
 You'll find an example with docker-compose [here](./docker-compose.yml) and with Kubernetes [there](./deployment.yaml)
-## What's available
+### What's available in there
 
-This image will provide you the following commands:
+This image will provide you the following executables:
 * python3
 * bash
+* sed
+* gawk
 * curl
 * jq
 * yq
 * kubectl
 
 N.B:
-
 * If there is something that miss, feel free to write your own Dockerfile that inherit this image (`comworkio/cmd-api`).
 * If you think that there is too much stuffs in this images, feel free to pick only what you need with a multistage build!
 
