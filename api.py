@@ -16,6 +16,18 @@ def get_script_output (cmd):
     except:
         return check_output(cmd, shell=True, universal_newlines=True)
 
+def check_mandatory_param(name):
+    if is_empty_request_field(name):
+        eprint("[check_mandatory_param] bad request : missing argument = {}, body = {}".format(name, request.data))
+        return {
+            "status": "bad_request",
+            "reason": "missing {} argument".format(name)
+        }
+    else:
+        return {
+            "status": "ok"
+        }
+
 def run_cmd():
     return get_script_output(os.environ['API_CMD'])
 
