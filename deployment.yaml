@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ls-as-a-service
+  namespace: ls-as-a-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ls-as-a-service
+  template:
+    metadata:
+      labels:
+        app: ls-as-a-service
+    spec:
+      containers:
+        - name: ls-as-a-service
+          image: comworkio/cmd-api:latest
+          imagePullPolicy: Always
+          env:
+            - name: API_CMD
+              value: "sleep 3; ls -l"

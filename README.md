@@ -20,6 +20,9 @@ The image is available and versioned here: https://hub.docker.com/r/comworkio/cm
 
 You'll only have to configure this image as a pod if you're using Kubernetes or container if you're using something like docker, docker-compose, podman or whatever.
 
+You'll find an example with docker-compose [here](./docker-compose.yml) and with Kubernetes [there](./deployment.yaml)
+## What's available
+
 This image will provide you the following commands:
 * python3
 * bash
