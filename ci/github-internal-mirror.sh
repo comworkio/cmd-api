@@ -11,12 +11,12 @@ for i in *; do
     rm -rf "${TARGET_PATH}/${i}"
     cp -R "${i}" "${TARGET_PATH}"
   fi
-done
 
-cp Dockerfile* "${TARGET_PATH}"
-cp docker-compose* "${TARGET_PATH}"
-cp README.md "${TARGET_PATH}"
-cp .gitignore "${TARGET_PATH}"
+  if [[ -f "${i}" ]] && [[ "${i}" != "LICENCE" && "${i}" != ".gitlab-ci.yml" ]]; then
+    rm -rf "${TARGET_PATH}/${i}"
+    cp "${i}" "${TARGET_PATH}"
+  fi
+done
 
 commit_msg=$(git log -1 --pretty=%B|sed '$ d')
 [[ $commit_msg ]] || commit_msg="Automatic update"
