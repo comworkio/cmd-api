@@ -23,7 +23,7 @@ github-internal-mirror:
 cmd-api-x86:
   stage: publish
   script:
-    - setsid ./ci/docker-deliver.sh "cmd-api" "2.6" "x86"
+    - setsid ./ci/docker-deliver.sh "cmd-api" "2.7" "x86"
   only:
     refs:
       - /^(master.*)$/
@@ -38,7 +38,7 @@ cmd-api-x86:
 cmd-api-arm:
   stage: publish
   script:
-    - setsid ./ci/docker-deliver.sh "cmd-api" "2.6" "arm"
+    - setsid ./ci/docker-deliver.sh "cmd-api" "2.7" "arm"
   only:
     refs:
       - /^(master.*)$/

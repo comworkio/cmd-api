@@ -63,12 +63,12 @@ def run_cmd_async_argv():
 def check_api_cmd_is_defined():
     if is_empty(os.environ.get('API_CMD')):
         return {
-            "status": "forbidden",
-            "reason": "API_CMD is not defined for this instance"
+            'status': 'forbidden',
+            'reason': 'API_CMD is not defined for this instance'
         }
     else:
         return {
-            "status": "ok"
+            'status': 'ok'
         }
 
 def check_argv_is_enabled():
@@ -79,22 +79,22 @@ def check_argv_is_enabled():
 
     if is_empty(enable_argv) or enable_argv != "enabled":
         return {
-            "status": "forbidden",
-            "reason": "ENABLE_ARGV is not enabled : value = {}".format(enable_argv)
+            'status': 'forbidden',
+            'reason': "ENABLE_ARGV is not enabled : value = {}".format(enable_argv)
         }
     elif is_not_empty(regexp_argv):
         if re.match(regexp_argv, argv):
             return {
-               "status": "ok"
+               'status': 'ok'
             }
         else:
             return {
-                "status": "forbidden",
-                "reason": "Args {} are not matching {}".format(argv, regexp_argv)
+                'status': 'forbidden',
+                'reason': "Args {} are not matching {}".format(argv, regexp_argv)
             } 
     else:
         return {
-            "status": "ok"
+            'status': 'ok'
         }
 
 class AsyncCmdApi(Resource):
@@ -183,7 +183,7 @@ class ManifestEndPoint(Resource):
                 manifest = json.load(manifest_file)
                 return manifest
         except IOError as err:
-            return {"error": err}
+            return 500, {'status': 'error', 'reason': err}
 
 health_check_routes = ['/', '/health', '/health/']
 cmd_routes = ['/cmd', '/cmd-api', '/cmd/', '/cmd-api/']
