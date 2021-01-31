@@ -68,7 +68,7 @@ def check_argv_is_enabled():
 
     if is_empty(enable_argv) or enable_argv != "enabled":
         return {
-            "status": "forbidden"
+            "status": "forbidden",
             "reason": "ENABLE_ARGV is not enabled : value = {}".format(enable_argv)
         }
     elif is_not_empty(regexp_argv):
@@ -78,7 +78,7 @@ def check_argv_is_enabled():
             }
         else:
             return {
-                "status": "forbidden"
+                "status": "forbidden",
                 "reason": "Args {} are not matching {}".format(argv, regexp_argv)
             } 
     else:
