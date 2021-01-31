@@ -103,7 +103,7 @@ class AsyncCmdApi(Resource):
         if is_not_ok(c):
             return c, 400
 
-        c = check_argv_is_enabled():
+        c = check_argv_is_enabled()
         if is_not_ok(c):
             return c, 403
 
@@ -131,7 +131,7 @@ class CmdApi(Resource):
         if is_not_ok(c):
             return c, 400
 
-        c = check_argv_is_enabled():
+        c = check_argv_is_enabled()
         if is_not_ok(c):
             return c, 403
 
