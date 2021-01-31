@@ -61,8 +61,8 @@ def run_cmd_async_argv():
     print("[run_cmd_async] output = {}".format(run_cmd_argv()))
 
 def check_argv_is_enabled():
-    regexp_argv = environ.get('REGEXP_ARGV')
-    enable_argv = environ.get('ENABLE_ARGV')
+    regexp_argv = os.environ.get('REGEXP_ARGV')
+    enable_argv = os.environ.get('ENABLE_ARGV')
     body = request.get_json(force=True)
     argv = body['argv']
 
