@@ -6,7 +6,7 @@ services:
     user: root
     build:
       context: .
-      dockerfile: Dockerfile.arm
+      dockerfile: Dockerfile
     environment: 
       - API_CMD=sleep 3; ls -l
     ports: 
