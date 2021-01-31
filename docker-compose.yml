@@ -4,8 +4,7 @@ services:
   cmd-api:
     image: comworkio/cmd-api:latest
     user: root
-    environment: 
-      - API_CMD=sleep 3; ls -l
+    environment:
       - ENABLE_ARGV=enabled
       - REGEXP_ARGV=^\-a$$
     ports: 

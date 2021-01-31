@@ -60,6 +60,17 @@ def run_cmd_argv():
 def run_cmd_async_argv():
     print("[run_cmd_async] output = {}".format(run_cmd_argv()))
 
+def check_api_cmd_is_defined():
+    if is_empty(os.environ.get('API_CMD')):
+        return {
+            "status": "forbidden",
+            "reason": "API_CMD is not defined for this instance"
+        }
+    else:
+        return {
+            "status": "ok"
+        }
+
 def check_argv_is_enabled():
     regexp_argv = os.environ.get('REGEXP_ARGV')
     enable_argv = os.environ.get('ENABLE_ARGV')
@@ -88,6 +99,10 @@ def check_argv_is_enabled():
 
 class AsyncCmdApi(Resource):
     def get(self):
+        c = check_api_cmd_is_defined()
+        if is_not_ok(c):
+            return c, 403
+
         async_process = Process( 
             target=run_cmd_async,
             daemon=True
@@ -99,6 +114,10 @@ class AsyncCmdApi(Resource):
             'async': True
         }
     def post(self):
+        c = check_api_cmd_is_defined()
+        if is_not_ok(c):
+            return c, 403
+
         c = check_mandatory_param('argv')
         if is_not_ok(c):
             return c, 400
@@ -120,6 +139,10 @@ class AsyncCmdApi(Resource):
 
 class CmdApi(Resource):
     def get(self):
+        c = check_api_cmd_is_defined()
+        if is_not_ok(c):
+            return c, 403
+
         output = run_cmd()
         return {
             'status': 'ok',
@@ -127,6 +150,10 @@ class CmdApi(Resource):
             'details': output
         }
     def post(self):
+        c = check_api_cmd_is_defined()
+        if is_not_ok(c):
+            return c, 403
+            
         c = check_mandatory_param('argv')
         if is_not_ok(c):
             return c, 400
