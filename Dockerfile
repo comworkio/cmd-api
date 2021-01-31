@@ -10,9 +10,10 @@ ENV K8S_VERSION=1.18.2 \
     WERKZEUG_RUN_MAIN=true \
     MANIFEST_FILE_PATH=/manifest.json
 
-COPY ./api.py ./manifest.json /
+COPY ./api.py ./manifest.json ./requirements.txt /
 
-RUN pip3 install flask-restful && \
+RUN pip3 install --upgrade pip && \
+    pip3 install -r /requirements.txt && \
     apk add --no-cache bash curl jq && \
     curl -LO "https://storage.googleapis.com/kubernetes-release/release/v$K8S_VERSION/bin/linux/$K8S_ARCH/kubectl" && \
     mv ./kubectl /usr/bin/kubectl && \
