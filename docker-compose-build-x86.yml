@@ -4,6 +4,9 @@ services:
   cmd-api:
     image: comworkio/cmd-api:latest
     user: root
+    build:
+      context: .
+      dockerfile: Dockerfile.arm
     environment: 
       - API_CMD=sleep 3; ls -l
     ports: 
