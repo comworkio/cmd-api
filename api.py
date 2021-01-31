@@ -60,7 +60,7 @@ def run_cmd_argv():
 def run_cmd_async_argv():
     print("[run_cmd_async] output = {}".format(run_cmd_argv()))
 
-def check_argv_is_enabled() {
+def check_argv_is_enabled():
     regexp_argv = environ.get('REGEXP_ARGV')
     enable_argv = environ.get('ENABLE_ARGV')
     body = request.get_json(force=True)
@@ -85,7 +85,6 @@ def check_argv_is_enabled() {
         return {
             "status": "ok"
         }
-}
 
 class AsyncCmdApi(Resource):
     def get(self):
