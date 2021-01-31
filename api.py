@@ -6,6 +6,7 @@ from multiprocessing import Process
 import os
 import json
 import sys
+import re
 
 app = Flask(__name__)
 api = Api(app)
@@ -59,6 +60,33 @@ def run_cmd_argv():
 def run_cmd_async_argv():
     print("[run_cmd_async] output = {}".format(run_cmd_argv()))
 
+def check_argv_is_enabled() {
+    regexp_argv = environ.get('REGEXP_ARGV')
+    enable_argv = environ.get('ENABLE_ARGV')
+    body = request.get_json(force=True)
+    argv = body['argv']
+
+    if is_empty(enable_argv) or enable_argv != "enabled":
+        return {
+            "status": "forbidden"
+            "reason": "ENABLE_ARGV is not enabled : value = {}".format(enable_argv)
+        }
+    elif is_not_empty(regexp_argv):
+        if re.match(regexp_argv, argv):
+            return {
+               "status": "ok"
+            }
+        else:
+            return {
+                "status": "forbidden"
+                "reason": "Args {} are not matching {}".format(argv, regexp_argv)
+            } 
+    else:
+        return {
+            "status": "ok"
+        }
+}
+
 class AsyncCmdApi(Resource):
     def get(self):
         async_process = Process( 
@@ -67,6 +95,7 @@ class AsyncCmdApi(Resource):
         )
         async_process.start()
         return {
+            'status': 'ok',
             'executed': True,
             'async': True
         }
@@ -75,12 +104,17 @@ class AsyncCmdApi(Resource):
         if is_not_ok(c):
             return c, 400
 
+        c = check_argv_is_enabled():
+        if is_not_ok(c):
+            return c, 403
+
         async_process = Process( 
             target=run_cmd_async_argv,
             daemon=True
         )
         async_process.start()
         return {
+            'status': 'ok',
             'executed': True,
             'async': True
         }
@@ -89,6 +123,7 @@ class CmdApi(Resource):
     def get(self):
         output = run_cmd()
         return {
+            'status': 'ok',
             'executed': True,
             'details': output
         }
@@ -97,8 +132,13 @@ class CmdApi(Resource):
         if is_not_ok(c):
             return c, 400
 
+        c = check_argv_is_enabled():
+        if is_not_ok(c):
+            return c, 403
+
         output = run_cmd_argv()
         return {
+            'status': 'ok',
             'executed': True,
             'details': output
         }
@@ -106,6 +146,7 @@ class CmdApi(Resource):
 class RootEndPoint(Resource):
     def get(self):
         return {
+            'status': 'ok',
             'alive': True
         }
 
