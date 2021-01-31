@@ -6,5 +6,7 @@ services:
     user: root
     environment: 
       - API_CMD=sleep 3; ls -l
+      - ENABLE_ARGV=enabled
+      - REGEXP_ARGV=^\-a$$
     ports: 
       - 8080:8080
