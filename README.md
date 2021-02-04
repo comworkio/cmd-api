@@ -11,6 +11,7 @@ This is the low cost FaaS that can be run wherever there is an OCI container run
 
 * Main repo: https://gitlab.comwork.io/oss/cmd-api
 * Github mirror backup: https://github.com/idrissneumann/cmd-api
+* Gitlab mirror backup: https://gitlab.com/ineumann/cmd-api
 
 ## Image on the dockerhub
 
