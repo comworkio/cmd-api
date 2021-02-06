@@ -58,7 +58,7 @@ N.B:
 ### Environment variables
 
 * `API_CMD`: the command to run when you call the endpoints (that can be an invocation of a shell script mounted via configmap or whatever)
-* `ENABLE_ARGV`(optional): enable the endpoint POST that can take args (beware of malicious injections, if you need it, take a look to the variable below)
+* `ENABLE_ARGV`(optional): enable the endpoint POST that can take args (beware of malicious injections, if you need it, take a look to the variable below). Take `enabled` or `disabled` as value
 * `REGEXP_ARGV`(optional): regexp to match the args syntax (in order to avoid malicious commands injections)
 * `FLASK_RUN_HOST`(optional): api address (default binded to `0.0.0.0`, shouldn't change on a Kubernetes context)
 * `FLASK_RUN_PORT`(optional): api port (default binded to `8080`)
