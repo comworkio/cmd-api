@@ -18,8 +18,13 @@ def get_script_output (cmd):
     except:
         return check_output(cmd, shell=True, universal_newlines=True)
 
+def is_forbidden (var):
+    forbidden_chars = ["'" , "\"", "&", ";", "|", "\\"]
+    return any(char in var for char in forbidden_chars)
+
 def is_not_empty (var):
-    return var is not None and "" != var and "null" != var and "nil" != var
+    empty_chars = ["", "null", "nil", "false", "False", "FALSE"]
+    return var is not None and not any(c == var for c in empty_chars)
 
 def is_empty (var):
     return not is_not_empty(var)
@@ -83,7 +88,7 @@ def check_argv_is_enabled():
             'reason': "ENABLE_ARGV is not enabled : value = {}".format(enable_argv)
         }
     elif is_not_empty(regexp_argv):
-        if re.match(regexp_argv, argv):
+        if re.match(regexp_argv, argv) and not is_forbidden(argv):
             return {
                'status': 'ok'
             }
