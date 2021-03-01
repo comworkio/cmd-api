@@ -188,7 +188,10 @@ class ManifestEndPoint(Resource):
                 manifest = json.load(manifest_file)
                 return manifest
         except IOError as err:
-            return 500, {'status': 'error', 'reason': err}
+            return {
+                'status': 'error', 
+                'reason': err
+            }, 500
 
 health_check_routes = ['/', '/health', '/health/']
 cmd_routes = ['/cmd', '/cmd-api', '/cmd/', '/cmd-api/']
