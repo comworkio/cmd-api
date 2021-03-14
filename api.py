@@ -23,8 +23,12 @@ def is_forbidden (var):
     return any(char in var for char in forbidden_chars)
 
 def is_not_empty (var):
-    empty_chars = ["", "null", "nil", "false", "False", "FALSE"]
-    return var is not None and not any(c == var for c in empty_chars)
+    if (isinstance(var, bool)):
+        return var
+    elif (isinstance(var, int)):
+        return False
+    empty_chars = ["", "null", "nil", "false", "none"]
+    return var is not None and not any(c == var.lower() for c in empty_chars)
 
 def is_empty (var):
     return not is_not_empty(var)
