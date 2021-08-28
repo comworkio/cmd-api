@@ -27,7 +27,7 @@ echo '{"version":"'"${VERSION}"'", "sha":"'"${sha}"'", "arch":"'"${ARCH}"'"}' > 
 
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose-build-${ARCH}.yml build --no-cache "${IMAGE}"
 
-echo "${DOCKER_ACCESS_TOKEN}" | docker login --username comworkio --password-stdin
+echo "${DOCKER_ACCESS_TOKEN}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
 
 tag_and_push "${VERSION}" "${IMAGE}" "${ARCH}"
 tag_and_push "${VERSION}-${CI_COMMIT_SHORT_SHA}" "${IMAGE}" "${ARCH}"
