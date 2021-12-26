@@ -9,7 +9,7 @@ mirror:
   only:
     - /^(master.*)$/
   tags:
-    - cmd-api
+    - mirror
 
 cmd-api-x86:
   stage: publish
