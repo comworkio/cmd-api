@@ -7,4 +7,5 @@ git push github master
 git push pgitlab master
 git push internal master
 git push bitbucket master
+git push froggit master
 exit 0
