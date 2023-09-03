@@ -24,7 +24,7 @@ def get_script_output (cmd):
         return check_output(cmd, shell=True, universal_newlines=True)
 
 def is_forbidden (var):
-    forbidden_chars = ["'" , "\"", "&", ";", "|", "\\"]
+    forbidden_chars = ["'" , "\"", "&", ";", "|", "\\", "$"]
     return any(char in var for char in forbidden_chars)
 
 def is_not_empty (var):
